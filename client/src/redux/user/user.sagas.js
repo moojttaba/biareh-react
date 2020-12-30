@@ -68,6 +68,8 @@ export function* signOut() {
   }
 }
 
+
+
 export function* signUp({
   payload: { name, email, password, passwordConfirm },
 }) {
