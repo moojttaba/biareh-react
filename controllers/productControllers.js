@@ -23,8 +23,8 @@ exports.getAllProducts = catchAsync(async (req, res, next) => {
     status: 'success',
     results: products.length,
     data: {
-      products
-    }
+      products,
+    },
   });
 });
 
@@ -39,8 +39,8 @@ exports.getProduct = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     data: {
-      product
-    }
+      product,
+    },
   });
 });
 
@@ -50,15 +50,15 @@ exports.createProduct = catchAsync(async (req, res, next) => {
   res.status(201).json({
     status: 'success',
     data: {
-      product: newProduct
-    }
+      product: newProduct,
+    },
   });
 });
 
 exports.updateProduct = catchAsync(async (req, res, next) => {
   const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
-    runValidators: true
+    runValidators: true,
   });
 
   if (!product) {
@@ -68,8 +68,8 @@ exports.updateProduct = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     data: {
-      product
-    }
+      product,
+    },
   });
 });
 
@@ -82,14 +82,14 @@ exports.deleteProduct = catchAsync(async (req, res, next) => {
 
   res.status(204).json({
     status: 'success',
-    data: null
+    data: null,
   });
 });
 
 exports.getProductStats = catchAsync(async (req, res, next) => {
   const stats = await Product.aggregate([
     {
-      $match: { ratingsAverage: { $gte: 4.5 } }
+      $match: { ratingsAverage: { $gte: 4.5 } },
     },
     {
       $group: {
@@ -99,12 +99,12 @@ exports.getProductStats = catchAsync(async (req, res, next) => {
         avgRating: { $avg: '$ratingsAverage' },
         avgPrice: { $avg: '$price' },
         minPrice: { $min: '$price' },
-        maxPrice: { $max: '$price' }
-      }
+        maxPrice: { $max: '$price' },
+      },
     },
     {
-      $sort: { avgPrice: 1 }
-    }
+      $sort: { avgPrice: 1 },
+    },
     // {
     //   $match: { _id: { $ne: 'EASY' } }
     // }
@@ -113,7 +113,7 @@ exports.getProductStats = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     data: {
-      stats
-    }
+      stats,
+    },
   });
 });

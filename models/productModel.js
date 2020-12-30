@@ -8,7 +8,7 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Your product’s name'],
     unique: true,
-    trim: true
+    trim: true,
     //maxLength: [150, "A tour name must less or equal than 40 careeacter"],
     //minLength: [5, "A tour name must less or equal than 40 careeacter"],
     //validate: [validator.isDecimal, 'carecter dddds'],
@@ -19,7 +19,7 @@ const productSchema = new mongoose.Schema({
   slug: String,
   description: {
     type: String,
-    required: [true, 'Your product’s description']
+    required: [true, 'Your product’s description'],
     //Example : Made from 100% organic cotton, this classic red men’s polo has a slim fit and signature logo embroidered on the left chest. Machine wash cold; imported.
     //Syntax :Max 5000 characters
   },
@@ -30,14 +30,14 @@ const productSchema = new mongoose.Schema({
   //   },
   imageLink: {
     type: String, //URL
-    required: [true, 'The URL of your product’s main image']
+    required: [true, 'The URL of your product’s main image'],
     //Example :http://​www.example.​com/​image1.​jpg
   },
   //   additionalImage_link: {},
   //   mobileLink: {},
   //   //////////////////////////////// Price & availability
   availability: {
-    type: String // ItemAvailability
+    type: String, // ItemAvailability
     // required: [true, `Your product's availability`],
     // Supported values: [in stock, out of stock, preorder]
     // Example :in stock
@@ -47,7 +47,7 @@ const productSchema = new mongoose.Schema({
   //   expiration_date: {},
   price: {
     type: Number, // Number plus currency (use ISO 4217)
-    required: [true, `Your product’s price`]
+    required: [true, `Your product’s price`],
     //min: [1, 'Rating must be above 1.0'],
     //max: [100000, 'Rating must be above 1.0'],
     // Example : 15.00 USD
@@ -56,11 +56,11 @@ const productSchema = new mongoose.Schema({
   salePrice: {
     type: Number,
     validate: {
-      validator: function(val) {
+      validator: function (val) {
         return val < this.price;
       },
-      message: 'below ({VALUE}) price'
-    }
+      message: 'below ({VALUE}) price',
+    },
   },
   //   salePriceDate: {},
   //   unitPriceMeasure: {},
@@ -81,7 +81,7 @@ const productSchema = new mongoose.Schema({
   //   },
   gtin: {
     type: String, //	Number (spaces and dashes are accepted, but ignored)
-    required: [true, `Your product’s Global Trade Item Number (GTIN)`]
+    required: [true, `Your product’s Global Trade Item Number (GTIN)`],
     // Example : 3234567890126
     // Syntax : Max 50 numeric characters (max 14 per value - added spaces and dashes are ignored)
     // Schema.org property : Product.gtin
@@ -233,7 +233,7 @@ const productSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now(),
-    select: false
+    select: false,
   },
   //   ratingsAverage: {
   //     type: Number,
@@ -252,8 +252,8 @@ const productSchema = new mongoose.Schema({
 
   SKU: {
     type: String,
-    required: [true, `Your product’s stock keep unit`]
-  }
+    required: [true, `Your product’s stock keep unit`],
+  },
 });
 
 // productSchema.virtual('priceToman').get(function () {
