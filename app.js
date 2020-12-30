@@ -53,6 +53,10 @@ app.use(
   })
 );
 
+// app.get('/', (req, res) => {
+//   res.send('hi moji');
+// });
+
 // Serving static files
 app.use(express.static(`${__dirname}/public`));
 
