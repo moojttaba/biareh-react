@@ -1,0 +1,480 @@
+{
+    "name": "Users",
+    "item": [
+      {
+        "name": "Get All Users",
+        "request": {
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{jwt}}",
+                "type": "string"
+              }
+            ]
+          },
+          "method": "GET",
+          "header": [],
+          "body": {
+            "mode": "raw",
+            "raw": ""
+          },
+          "url": {
+            "raw": "{{URL}}api/v1/users?role=user",
+            "host": ["{{URL}}api"],
+            "path": ["v1", "users"],
+            "query": [
+              {
+                "key": "role",
+                "value": "user"
+              }
+            ]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Get User",
+        "request": {
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{jwt}}",
+                "type": "string"
+              }
+            ]
+          },
+          "method": "GET",
+          "header": [],
+          "body": {
+            "mode": "raw",
+            "raw": ""
+          },
+          "url": {
+            "raw": "{{URL}}api/v1/users/2",
+            "host": ["{{URL}}api"],
+            "path": ["v1", "users", "2"]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Update User",
+        "request": {
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{jwt}}",
+                "type": "string"
+              }
+            ]
+          },
+          "method": "PATCH",
+          "header": [
+            {
+              "key": "Content-Type",
+              "name": "Content-Type",
+              "value": "application/json",
+              "type": "text"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n\t\"name\": \"Administrator\"\n}"
+          },
+          "url": {
+            "raw": "{{URL}}api/v1/users/5ccb07c27e0cc24b1b44b7b5",
+            "host": ["{{URL}}api"],
+            "path": ["v1", "users", "5ccb07c27e0cc24b1b44b7b5"]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Delete User",
+        "request": {
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{jwt}}",
+                "type": "string"
+              }
+            ]
+          },
+          "method": "DELETE",
+          "header": [],
+          "body": {
+            "mode": "raw",
+            "raw": ""
+          },
+          "url": {
+            "raw": "{{URL}}api/v1/users/5cd1a3b341c1d027493464e3",
+            "host": ["{{URL}}api"],
+            "path": ["v1", "users", "5cd1a3b341c1d027493464e3"]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Get Current User",
+        "request": {
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{jwt}}",
+                "type": "string"
+              }
+            ]
+          },
+          "method": "GET",
+          "header": [],
+          "body": {
+            "mode": "raw",
+            "raw": ""
+          },
+          "url": {
+            "raw": "{{URL}}api/v1/users/me",
+            "host": ["{{URL}}api"],
+            "path": ["v1", "users", "me"]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Update Current User",
+        "request": {
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{jwt}}",
+                "type": "string"
+              }
+            ]
+          },
+          "method": "PATCH",
+          "header": [
+            {
+              "key": "Content-Type",
+              "name": "Content-Type",
+              "value": "application/json",
+              "type": "text"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n\t\"name\": \"Jonas Schmedtmann\",\n\t\"role\": \"admin\"\n}"
+          },
+          "url": {
+            "raw": "{{URL}}api/v1/users/updateMe",
+            "host": ["{{URL}}api"],
+            "path": ["v1", "users", "updateMe"]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Delete Current User",
+        "request": {
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{jwt}}",
+                "type": "string"
+              }
+            ]
+          },
+          "method": "DELETE",
+          "header": [],
+          "body": {
+            "mode": "raw",
+            "raw": ""
+          },
+          "url": {
+            "raw": "{{URL}}api/v1/users/deleteMe",
+            "host": ["{{URL}}api"],
+            "path": ["v1", "users", "deleteMe"]
+          }
+        },
+        "response": []
+      }
+    ]
+  },
+  {
+    "name": "Authentication",
+    "item": [
+      {
+        "name": "Sign Up",
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "4a5a1b58-6b97-4d86-9d49-719060cab8f5",
+              "exec": [
+                "pm.environment.set(\"jwt\", pm.response.json().token);"
+              ],
+              "type": "text/javascript"
+            }
+          }
+        ],
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "name": "Content-Type",
+              "value": "application/json",
+              "type": "text"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n\t\"name\": \"Jonas\",\n    \"email\": \"jonas@mailsac.com\",\n\t\"password\": \"pass1234\",\n\t\"passwordConfirm\": \"pass1234\"\n}"
+          },
+          "url": {
+            "raw": "{{URL}}api/v1/users/signup",
+            "host": ["{{URL}}api"],
+            "path": ["v1", "users", "signup"]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Login",
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "a36e7176-54eb-4b09-9125-9707e20d3ffb",
+              "exec": [
+                "pm.environment.set(\"jwt\", pm.response.json().token);"
+              ],
+              "type": "text/javascript"
+            }
+          }
+        ],
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "name": "Content-Type",
+              "value": "application/json",
+              "type": "text"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n\t\"email\": \"admin@natours.io\",\n\t\"password\": \"{{password}}\"\n}"
+          },
+          "url": {
+            "raw": "{{URL}}api/v1/users/login",
+            "host": ["{{URL}}api"],
+            "path": ["v1", "users", "login"]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Forgot Password",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "name": "Content-Type",
+              "value": "application/json",
+              "type": "text"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n\t\"email\": \"test3@natours.io\"\n}"
+          },
+          "url": {
+            "raw": "{{URL}}api/v1/users/forgotPassword",
+            "host": ["{{URL}}api"],
+            "path": ["v1", "users", "forgotPassword"]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Reset Password",
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "887b4615-1d19-442b-b104-1cc764105ffb",
+              "exec": [
+                "pm.environment.set(\"jwt\", pm.response.json().token);"
+              ],
+              "type": "text/javascript"
+            }
+          }
+        ],
+        "request": {
+          "method": "PATCH",
+          "header": [
+            {
+              "key": "Content-Type",
+              "name": "Content-Type",
+              "value": "application/json",
+              "type": "text"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n\t\"password\": \"newpassword\",\n\t\"passwordConfirm\": \"newpassword\"\n}"
+          },
+          "url": {
+            "raw": "{{URL}}api/v1/users/resetPassword/1652bfc347b939d3d19cea352d231d6dbe6dfef0884e68e6c61629019c44b9ca",
+            "host": ["{{URL}}api"],
+            "path": [
+              "v1",
+              "users",
+              "resetPassword",
+              "1652bfc347b939d3d19cea352d231d6dbe6dfef0884e68e6c61629019c44b9ca"
+            ]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Update Current User Password",
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "f3e69f3e-55b4-4a83-8206-f14411403fe7",
+              "exec": [
+                "pm.environment.set(\"jwt\", pm.response.json().token);"
+              ],
+              "type": "text/javascript"
+            }
+          }
+        ],
+        "request": {
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{jwt}}",
+                "type": "string"
+              }
+            ]
+          },
+          "method": "PATCH",
+          "header": [
+            {
+              "key": "Content-Type",
+              "name": "Content-Type",
+              "value": "application/json",
+              "type": "text"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n\t\"passwordCurrent\": \"pass1234\",\n\t\"password\": \"newpassword\",\n\t\"passwordConfirm\": \"newpassword\"\n}"
+          },
+          "url": {
+            "raw": "{{URL}}api/v1/users/updateMyPassword",
+            "host": ["{{URL}}api"],
+            "path": ["v1", "users", "updateMyPassword"]
+          }
+        },
+        "response": []
+      }
+    ]
+  },
+  {
+    "name": "Bookings",
+    "item": [
+      {
+        "name": "Get All Bookings",
+        "request": {
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{jwt}}",
+                "type": "string"
+              }
+            ]
+          },
+          "method": "GET",
+          "header": [],
+          "body": {
+            "mode": "raw",
+            "raw": ""
+          },
+          "url": {
+            "raw": "{{URL}}api/v1/bookings",
+            "host": ["{{URL}}api"],
+            "path": ["v1", "bookings"]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Get Booking",
+        "request": {
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{jwt}}",
+                "type": "string"
+              }
+            ]
+          },
+          "method": "GET",
+          "header": [],
+          "body": {
+            "mode": "raw",
+            "raw": ""
+          },
+          "url": {
+            "raw": "{{URL}}api/v1/bookings/5ce3f70754eaa0063fd522e8",
+            "host": ["{{URL}}api"],
+            "path": ["v1", "bookings", "5ce3f70754eaa0063fd522e8"]
+          }
+        },
+        "response": []
+      }
+    ]
+  }
+],
+"event": [
+  {
+    "listen": "prerequest",
+    "script": {
+      "id": "18b4769a-4234-4964-a082-4f26694e5624",
+      "type": "text/javascript",
+      "exec": [""]
+    }
+  },
+  {
+    "listen": "test",
+    "script": {
+      "id": "17f3f82d-7c5a-4be2-b419-83c1d5e408ea",
+      "type": "text/javascript",
+      "exec": [""]
+    }
+  }
+]
